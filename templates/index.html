@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details For Rooms In THE BIG ORANGE</title>
+    {% comment %} <link rel="stylesheet" href="styles.css"> {% endcomment %}
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+        * {
+            font-family: 'Roboto';
+            letter-spacing: 0.05em;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+
+            text-align: center;
+            height: 100%;
+            background: url("https://cdn.pixabay.com/photo/2017/02/25/17/31/california-2098327_960_720.jpg");
+            /* For browsers that do not support gradients */
+            overflow-x: hidden;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 100% 100%;
+        }
+
+        .step-bar {
+            text-transform: uppercase;
+            color: white;
+            font-size: 0.8em;
+            margin-top: 40px;
+        }
+
+        .step-bar li {
+            display: inline-block;
+            position: relative;
+            margin: 0px 30px;
+            width: 120px;
+        }
+
+        .step-bar .number {
+            transition: background-color 0.1s linear, color 0.1s linear;
+            display: inline-block;
+            position: relative;
+            color: #777;
+            background-color: #fff;
+            width: 20px;
+            padding: 8px 5px;
+            margin-bottom: 4px;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        .step-bar .line {
+            background-color: #fff;
+            width: 180px;
+            height: 5px;
+            position: absolute;
+            top: 15px;
+            right: 60px;
+            z-index: 0;
+        }
+
+        .step-bar .active {
+            background-color: #6A1B9A;
+            color: #fff;
+        }
+
+        .register-form {
+            display: inline-block;
+            background: #fff;
+            padding: 75px 50px;
+            width: 300px;
+            text-align: center;
+            -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .error {
+            border: 1px solid #E57373;
+            background-color: #FFEBEE;
+        }
+
+        .error-text {
+            text-align: left;
+            padding-left: 10px;
+            font-size: 0.7em;
+            color: #E57373;
+        }
+
+        h1 {
+            margin: 75px 0;
+            display: block;
+            color: #fff;
+            font-size: 1.15em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 200;
+        }
+
+        .register-form h2 {
+            font-size: 1em;
+            color: #777;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .register-form input {
+            padding: 15px;
+            margin: 5px 0;
+            width: 260px;
+        }
+
+        .register-form input::placeholder {
+            color: #aaa;
+        }
+
+        .register-form input.error::placeholder {
+            color: #555;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 40px;
+            background-color: #6A1B9A;
+            color: #fff;
+            margin: 25px 0 10px 0;
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .button:hover {
+            background-color: palevioletred;
+        }
+
+        .disabled {
+            background-color: #aaa;
+        }
+
+        .disabled:hover {
+            background-color: #aaa;
+            cursor: default
+        }
+
+        .account-setup,
+        .finish-step,
+        .user-details {
+            transition: 1s all ease-in-out;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .account-setup {
+            left: calc(50% - 175px);
+        }
+
+        .finish-step,
+        .user-details {
+            left: 1400px;
+        }
+
+        .line {
+            transition: all 1s ease-in-out;
+            background: linear-gradient(to right, #6A1B9A 50%, white 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+
+        .line-active {
+            background-position: left bottom;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            font-size: 0.8em;
+            padding-left: 5px;
+            color: #444;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        .accept-conditions {
+            margin-top: 20px;
+        }
+
+        input::placeholder {
+            color: black;
+        }
+
+
+        @media(max-width: 600px) {
+            .step-bar {
+                display: none;
+            }
+        }
+
+        .drop {
+            font-size: larger;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="step-bar">
+        <ul>
+            <li>
+                <div class="number active">1</div>
+                <div class="text">Details</div>
+            </li>
+            <li>
+                <div class="number">2</div>
+                <div class="text">Preferences</div>
+                <div class="line"></div>
+            </li>
+            <li>
+                <div class="number">3</div>
+                <div class="text">Location</div>
+                <div class="line"></div>
+            </li>
+        </ul>
+    </div>
+    <h1 style=" color:black; font-size: larger; font-family: Times New Roman"><b>Enter The Following Details</b> </h1>
+    <form action="/base" method="POST">
+        {% csrf_token %}
+        <div class="account-setup register-form">
+            <h2>Step 1</h2>
+            <input name="name" type="name" placeholder="Name" />
+            <input name="email" type="email" placeholder="Email" />
+            <input name="Mobile Number" type="number" placeholder="Mobile Number" />
+            <input name="Income" type="Income" placeholder="Income" />
+            <div class="button firstNext">Next</div>
+        </div>
+        <div class="user-details register-form">
+            <h2>Step 2</h2>
+            <input name="Nofr" type="number" placeholder="Number Of Rooms" />
+            <input name="Nobr" type="number" placeholder="Number Of Bedrooms" />
+            <input name="PPOR" type="number" placeholder="Preffered Price Of Room" />
+            <div class="button firstPrev">Back</div>
+            <div class="button secondNext">Next</div>
+        </div>
+        <div class="finish-step register-form">
+            <h2>Step 3</h2>
+            <label for="Location">Location</label>
+            <select class=drop type=text name="place" placeholder="Select Location">
+                <option value="" disabled selected>Select Desired Place</option>
+                <optgroup label="Top Rated">
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="Sonoma Wine Country">Sonoma Wine Country</option>
+                    <option value="Highway 1">Highway 1</option>
+                    <option value="Yosemite National Park">Yosemite National Park</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="Monterey Bay">Monterey Bay</option>
+                    <option value="Lake Tahoe">Lake Tahoe</option>
+                    <option value="Big Sur">Big Sur</option>
+            </select>
+            <div class="button secondPrev">Back</div>
+            <input type="submit" class="button">
+            <!-- <div class="button">Submit</div> -->
+
+        </div>
+    </form>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script>let steps = $('.step-bar ul li');
+
+        // First step
+        $('.firstNext').on('click', (e) => {
+            setTimeout(() => {
+                $(steps[1]).find('.number').addClass('active');
+            }, 1000);
+
+            $(steps[1]).find('.line').addClass('line-active');
+            $('.account-setup').css('left', '-4000px');
+            $('.user-details').css('left', 'calc(50% - 175px)');
+        });
+
+        // Second step
+        $('.secondNext').on('click', (e) => {
+            setTimeout(() => {
+                $(steps[2]).find('.number').addClass('active');
+            }, 1000);
+
+            $(steps[2]).find('.line').addClass('line-active');
+            $('.user-details').css('left', '-4000px');
+            $('.finish-step').css('left', 'calc(50% - 175px)');
+        });
+
+        $('.firstPrev').on('click', (e) => {
+            $(steps[1]).find('.number').removeClass('active');
+            $(steps[1]).find('.line').removeClass('line-active');
+            $('.user-details').css('left', '4000px');
+            $('.account-setup').css('left', 'calc(50% - 175px)');
+        });
+
+        // Last step
+        $('.secondPrev').on('click', (e) => {
+            $(steps[2]).find('.number').removeClass('active');
+            $(steps[2]).find('.line').removeClass('line-active');
+            $('.finish-step').css('left', '4000px');
+            $('.user-details').css('left', 'calc(50% - 175px)')
+        });
+
+
+    </script>
+</body>
+
+</html>

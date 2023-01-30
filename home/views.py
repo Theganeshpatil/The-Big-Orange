@@ -20,7 +20,7 @@ def loginUser(requests):
         if user is not None:
             # A backend authenticated the credentials
             login(requests, user)
-            return redirect('/')
+            return redirect('/base')
         else:
             # No backend authenticated the credentials
             return render(requests, 'login.html')
@@ -34,4 +34,16 @@ def logoutUser(requests):
 
 
 def base(requests):
-    return render(requests, 'base.html')
+    # if requests.method == 'POST':
+    #     print('done post request')
+    if requests.method == 'POST':
+        name = requests.POST.get('name')
+        email = requests.POST.get('email')
+        Mobile_Number = requests.POST.get('Mobile Number')
+        Income = requests.POST.get('Income')
+        Nofr = requests.POST.get('Nofr')
+        Nobr = requests.POST.get('Nobr')
+        ppor = requests.POST.get('PPOR')
+        place = requests.POST.get('place')
+        print(name, email, Mobile_Number, Income, Nofr, Nobr, ppor, cars)
+    return render(requests, 'index.html')

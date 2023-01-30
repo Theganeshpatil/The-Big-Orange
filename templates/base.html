@@ -22,7 +22,7 @@
 
 <body>
 
-
+{% comment %} 
     <header class="blog-header py-3 headerDark">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
@@ -33,13 +33,10 @@
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 {%block navbar-btn %} {%endblock navbar-btn%}
-                
-                {% comment %} <a class="btn btn-sm btn-outline-dark mx-2" href="/logout">Logout</a> {% endcomment %}
+                <a class="btn btn-sm btn-outline-dark mx-2" href="/logout">Logout</a>
             </div>
         </div>
-    </header>
-
-    <h1>Hello, world!</h1>
+    </header> {% endcomment %}
     {%block body%} {%endblock body%}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"

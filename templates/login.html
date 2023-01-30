@@ -77,13 +77,43 @@
 {%block body%} 
 <form action="/login" method="post">
     {% csrf_token %}
-    <label for="username">username</label>
+    {% comment %} <label for="username">username</label>
     <input type="text" name="username" id="username">
     <label for="password">password</label>
     <input type="text" name="password" id="password">
-    <button>submit</button>
+    <button>submit</button> {% endcomment %}
 
     
+  <div class="container">
+    <h1>Log In To The BigOrange</h1>
+    <br>
+    <br>
+    <div class="box">
+      <i class="fa fa-envelope"></i>
+      <input type="text" name="username" placeholder="Enter Your Username">
+    </div>
+    <br>
+    <br>
+
+
+    <div class="box">
+      <i class="fa fa-key"></i>
+      <input type="password" name="password" placeholder="Enter Your Password" style="width: 100%;" id="myInput"
+        height="100px">
+
+    </div>
+    <br>
+    <br>
+    <button id="button" style="right: 200px"> <span> Sign In </span></button>
+
+
+
+    <div id="checklist">
+      <input id="01" type="checkbox" onclick="myFunction()" name="r" value="1" checked>
+      <label for="01">Show Password</label>
+
+    </div>
+  </div>
 
 </form>
 
