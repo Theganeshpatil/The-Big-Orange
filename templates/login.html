@@ -1,4 +1,80 @@
+{%extends 'base.html'%}
 
+{%block style%}
+<style>
+    @font-face {
+        font-family: Times New Romania;
+        src: url(Poppins-Medium.ttf) format("truetype");
+    }
+
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 100px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+    }
+
+    div {
+        background-color: whitesmoke;
+        margin: auto;
+        width: 50%;
+        /* border: 3px solid silver; */
+        padding: 10px;
+        text-align: center;
+    }
+
+    #button {
+        display: inline-block;
+        border-radius: 14px;
+        background-color: orange;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 18px;
+        font-family: Segoe Print;
+        padding: 20px;
+        width: 200px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 15px;
+
+    }
+
+    #button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    #button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    #button:hover span {
+        padding-right: 25px;
+    }
+
+    #button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+</style> {%endblock style%}
+
+
+{%block body%} 
 <form action="/login" method="post">
     {% csrf_token %}
     <label for="username">username</label>
@@ -6,4 +82,11 @@
     <label for="password">password</label>
     <input type="text" name="password" id="password">
     <button>submit</button>
+
+    
+
 </form>
+
+{%endblock body%}
+
+

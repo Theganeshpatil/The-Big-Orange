@@ -31,3 +31,7 @@ def loginUser(requests):
 def logoutUser(requests):
     logout(requests)
     return redirect('/login')
+
+
+def base(requests):
+    return render(requests, 'base.html')

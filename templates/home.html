@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample</title>
-</head>
-
+{%block navbar-btn %}
+<a class="btn btn-sm btn-outline-primary mx-2" href="/register_user">Sign up</a>
+<a class="btn btn-sm btn-outline-dark mx-2" href="/login">Login</a>
+{%endblock navbar-btn%}
 <body>
     <h1>The big ornage</h1>
     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis accusamus nam dolores tempore itaque nobis non
         facilis explicabo distinctio, soluta repudiandae assumenda neque, sapiente saepe temporibus, modi quod fugiat
         consequatur.</p>
 </body>
-
-</html>
