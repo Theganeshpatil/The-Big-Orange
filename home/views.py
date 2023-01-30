@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
+import pickle
+import sklearn
 # Create your views here.
 
 
@@ -45,5 +47,11 @@ def base(requests):
         Nobr = requests.POST.get('Nobr')
         ppor = requests.POST.get('PPOR')
         place = requests.POST.get('place')
-        print(name, email, Mobile_Number, Income, Nofr, Nobr, ppor, cars)
+        print(name, email, Mobile_Number, Income, Nofr, Nobr, ppor, place)
+
+        car_pickle = open(
+            "/Users/ganesh/Desktop/djangoP/Ics214 Project/the_big_orange/pp1.pkl", "rb")
+        car_contents = pickle.load(car_pickle)
+        print(car_contents)
+
     return render(requests, 'index.html')
