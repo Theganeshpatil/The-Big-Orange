@@ -12,6 +12,9 @@ from home import keys
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import pandas as pd
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # Create your views here.
 
 
@@ -80,15 +83,17 @@ def base(requests):
             writer.writerow(['longitude', 'latitude', 'housing_median_age', 'households', 'median_income', 'rooms_per_house',
                             'ocean_proximity_INLAND', 'ocean_proximity_ISLAND', 'ocean_proximity_NEAR BAY', 'ocean_proximity_NEAR OCEAN', 'bedrooms_per_house'])
             writer.writerow([-122.4194, 37.7749, 40.4, 361222,
-                            Income, Nofr, Nobr, 0, 0, 0, 1])
+                            Income, Nofr,  0, 0, 0, 1, Nobr])
             writer.writerow([-122.4580, 38.2919, 42.1, 188841,
-                            Income, Nofr, Nobr, 0, 0, 0, 1])
+                            Income, Nofr,  0, 0, 0, 1, Nobr])
             writer.writerow([-118.2437, 34.0522, 35.0, 3620308,
-                            Income, Nofr, Nobr, 0, 0, 0, 1])
-            writer.writerow([-120.0324, 39.0968, 38.8, 9078,
-                            0, Income, Nofr, Nobr, 0, 0, 1])
+                            Income, Nofr,  0, 0, 0, 1, Nobr])
+            writer.writerow([-121.9437, 36.8007, 39.0, 12912,
+                            Income, Nofr,  0, 0, 1, 0, Nobr])
+            writer.writerow([-120.0324, 36.8007, 38.8, 9078,
+                            0, Income, Nofr,  0, 0, 1, Nobr])
             writer.writerow([-121.8081, 36.2704, 49, 1137,
-                            Income, Nofr, Nobr, 0, 0, 0, 1])
+                            Income, Nofr,  0, 0, 0, 1, Nobr])
 
         df2 = pd.read_csv('final.csv')
         pred = model.predict(df2)
@@ -101,7 +106,7 @@ def base(requests):
         email_reciever = 'mayank21bcs168@iiitkottayam.ac.in', 'rajvardhandas@outlook.com', 'aditya21bcs180@iiitkottayam.ac.in', 'ganesh21bcy10@iiitkottayam.ac.in'
 
         subject = "THE BIG ORANGE CAL"
-        body = f'\nHello, {name}! \nWe at The Big Orange Cal have shortlisted these properties for you according to your need and preferneces.\nPlease visit our website for further detail'
+        body = f'\nHello, {name}! \nWe at The Big Orange Cal have shortlisted these properties for you according to your need and preferneces.\n {Nobr} Bedroom house at {place} will cost you {min(pred)}\nPlease visit our website for further detail'
 
         em = EmailMessage()
         em['From'] = email_sender
@@ -116,21 +121,25 @@ def base(requests):
             print('Mail has been sent to user')
 
         # sending sms
-        client = Client(keys.account_sid, keys.auth_token)
-        message = client.messages.create(
-            body='''THE BIG ORANGE...........
-            We noticed that you visited our website and hope that
-            you found the desired deal.
-            Keep visiting us for more upcoming offers and deals''',
-            from_=keys.twilio_number,
-            to=keys.target_number
-        )
+        # client = Client(keys.account_sid, keys.auth_token)
+        # message = client.messages.create(
+        #     body='''THE BIG ORANGE...........
+        #     We noticed that you visited our website and hope that
+        #     you found the desired deal.
+        #     Keep visiting us for more upcoming offers and deals''',
+        #     from_=keys.twilio_number,
+        #     to=keys.target_number
+        # )
         context = {
             'name': name,
             'Nobr': Nobr,
             'place': place,
-            'output': pred,
-
+            'output1': int(pred[0]),
+            'output2': int(pred[1]),
+            'output3': int(pred[2]),
+            'output4': int(pred[3]),
+            'output5': int(pred[4]),
+            'output6': int(pred[5]),
         }
         return render(requests, 'output.html', context=context)
 
