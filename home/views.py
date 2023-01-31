@@ -11,13 +11,14 @@ from twilio.rest import Client
 from home import keys
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+import pandas as pd
 # Create your views here.
 
 
 def home(requests):
     if requests.user.is_anonymous:
         return redirect("/login")
-    return render(requests, 'home.html')
+    return render(requests, 'Site2/Home.html')
 
 
 def loginUser(requests):
@@ -44,8 +45,8 @@ def logoutUser(requests):
 
 
 def base(requests):
-    # if requests.method == 'POST':
-    #     print('done post request')
+    if requests.user.is_anonymous:
+        return redirect("/login")
     if requests.method == 'POST':
         name = requests.POST.get('name')
         email = requests.POST.get('email')
@@ -59,7 +60,7 @@ def base(requests):
 
         # model integration
         df = pd.read_csv(
-            '/Users/mayank/Desktop/TheBadaOrange/The-Big-Orange/housing.csv')
+            '/Users/ganesh/Desktop/djangoP/Ics214 Project/the_big_orange/housing.csv')
         df['total_bedrooms'] = df['total_bedrooms'].fillna(
             df['total_bedrooms'].mean())
         df['rooms_per_house'] = df['total_rooms']/df['households']
@@ -114,15 +115,23 @@ def base(requests):
             smtp.sendmail(email_sender, email_reciever, em.as_string())
             print('Mail has been sent to user')
 
-    # sending sms
-    # client = Client(keys.account_sid, keys.auth_token)
-    # message = client.messages.create(
-    #     body='''THE BIG ORANGE...........
-    #     We noticed that you visited our website and hope that
-    #     you found the desired deal.
-    #     Keep visiting us for more upcoming offers and deals''',
-    #     from_=keys.twilio_number,
-    #     to=keys.target_number
-    # )
+        # sending sms
+        client = Client(keys.account_sid, keys.auth_token)
+        message = client.messages.create(
+            body='''THE BIG ORANGE...........
+            We noticed that you visited our website and hope that
+            you found the desired deal.
+            Keep visiting us for more upcoming offers and deals''',
+            from_=keys.twilio_number,
+            to=keys.target_number
+        )
+        context = {
+            'name': name,
+            'Nobr': Nobr,
+            'place': place,
+            'output': pred,
+
+        }
+        return render(requests, 'output.html', context=context)
 
     return render(requests, 'index.html')
